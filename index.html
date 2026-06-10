@@ -2,41 +2,51 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, inital-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia game</title>
+
     <link rel="stylesheet" href="styles.css">
-    <script src=""script.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
+
 <body> 
     <main id="game">
 
-        <section id="question-card"> </section>
+       <header>
+        <h1 id="game-title">Speedy Trivia</h1>
+        <div id="score-display">
+          Score: <span id="score">0</span>
+        </div>
+      </header>
+      
+      <section id="question-card">
 
-<h1 id="game-title">Speedy Trivia</h1>
-    <div id="score-diplay">Score: <span id="score">0</span></div>
-  </header>
+        <p id="question-number">Question 1 of 5</p>
 
-<section id="question-card">
-    <p id="question-number">Question 1 out of 5</p>
+        <h2 id="question-text">
+          Which actor was Batman in the movie "The Dark Knight?"
+        </h2>
+        
+        <ul id="answer-list">
+          <li><button class="answer-btn">Christian Bale</button></li>
+          <li><button class="answer-btn">Robert Pattinson</button></li>
+          <li><button class="answer-btn">Bruce Wayne</button></li>
+          <li><button class="answer-btn">Ben Affleck</button></li>
+        </ul>
 
-    <h2 id="question-text">Which actor was Batman in the movie "The Dark Knight?"</h2>
+        <button id="next-btn" class="hidden">
+          Next Question ->
+        </button>
+      
+      </section>
 
-    <ul id="answer-list">
-      <li><button class="answer-btn">Christian Bale</button></li>
-      <li><button class="answer-btn">Robert Pattersion</button></li>
-      <li><button class="answer-btn">Bruce Wayne</button></li>
-      <li><button class="answer-btn">Ben Affleck</button></li>
-    </ul>
+      <section id="end-screen" class="hidden">
+        <h2>Game Over!</h2>
+        <p>Your final score will appear here.</p>
+      </section>
+    
+    </main>
 
-    <button id="next-btn" class="hidden">Next Question →
-
-    </button>
-</section>
-
-<section id="end-screen" class="hidden"</section>
-        </main>
     </body>
-</html>
-
-
+    </html>
   
