@@ -9,7 +9,7 @@
 body {
     font-family: 'Comic Sans', Times, serif;
     background-color: pink;
-    min-height: auto;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     padding: 20px;

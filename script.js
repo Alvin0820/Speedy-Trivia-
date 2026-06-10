@@ -92,6 +92,43 @@ answerList.addEventListener("click", (event)=> {
     nextBtn.classList.remove("hidden")
 });
 
+nextBtn.addEventListener("click", () => {
+    currentIndex ++
+    if(currentIndex < questions.length){
+     loadQuestion(currentIndex)
+    }else {
+        showEndScreen();
+    }
+})
+
+function showEndScreen(){
+    // 1. Hide the question card
+    questionCard.classList.add("hidden")
+    // 2. Show the end screen
+    endScreen.classList.remove("hidden")
+    
+    const scoreHeading = document.textContent("h2")
+    scoreHeading.textContent = 'You scored ${score} out of ${questions.length}'
+
+    const message = document.createElement("p")
+
+    if (score === questions.length) {
+        message.textContent = "Perfect Score! Good Job!"
+    }else if (score >= Math.ceil(questions.length / 2)) {
+        message.textContent = "Nice Work! You passed"
+    } else {
+        message.textContent = "Keep practicing and try again!"
+    }
+
+    const restartButton = document.createElement("button")
+    restartButton.id = "restart-btn"
+    restartButton.textContent = "Play Again";
+
+    endScreen.appendChild(scoreHeading)
+    endScreen.appendChild(message)
+    endScreen.appendChild(restartButton)
+};
+
 loadQuestion(0);
 
 // Why does clicking a button inside #answer-list trigger this listener?
