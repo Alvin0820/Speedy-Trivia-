@@ -1,4 +1,6 @@
-
+// =========================================
+// Phase 1: Connect To DOM
+// ========================================
 const gameTitle = document.getElementById("game-title");
 const scoreDisplay = document.getElementById("score");
 
@@ -12,6 +14,23 @@ const endScreen = document.getElementById("end-screen");
 const answerBtnsCollection = document.getElementsByClassName("answer-btn");
 
 const answerBtnsNodeList = document.querySelectorAll(".answer-btn");
+
+// =======================
+// Phase 2: DOM Manipulation
+// =======================
+
+gameTitle.textContent = "⚡ Quick Fire Trivia" // Changes the game title
+console.log("First Question:", questionText.textContent) // Logs the first question of the Trivia
+questionNumber.textContent = questionNumber.textContent.toUpperCase();
+
+const firstBtn = answerBtnsNodeList[0]
+const firstLi = firstBtn.parentElement;
+
+console.log("The first button:", firstBtn)
+console.log("Its parent <li>:", firstLi)
+console.log("The <ul> that holds all buttons:", firstLi.parentElement);
+
+//questionCard.classList.add("answered");
 
 console.log(gameTitle);
 console.log(scoreDisplay);
