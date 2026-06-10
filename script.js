@@ -1,3 +1,54 @@
+const questions = [
+  {
+    text: "Who invented the World Wide Web?",
+    answers: [
+      "Tim Berners-Lee",
+      "Bill Gates",
+      "Linus Torvalds",
+      "Ada Lovelace",
+    ],
+    correct: 0,
+  },
+  {
+    text: "What does HTML stand for?",
+    answers: [
+      "Hyper Text Markup Language",
+      "High Text Machine Language",
+      "Hyper Transfer Mark Language",
+      "Home Tool Markup Language",
+    ],
+    correct: 0,
+  },
+  {
+    text: "Which language runs in the browser?",
+    answers: ["Java", "C++", "JavaScript", "Python"],
+    correct: 2,
+  },
+];
+
+let currentIndex = 0;
+let score = 0;
+
+function loadQuestion(index) {
+  const currentQuestion = questions[index];
+
+  questionNumber.textContent = "Question ${index + 1} of ${questions.length}";
+  questionText.textContent = currentQuestion.text;
+
+  const btnArray = Array.from(answerBtnsNodeList);
+
+  btnArray.forEach((btn, i) => {
+    btn.textContent = currentQuestion.answers[i];
+    btn.className = "answer-btn" 
+  });
+
+  nextBtn.classList.add("hidden")
+
+  questionCard.classList.remove("removed");
+}
+
+loadQuestion(0);
+
 // =========================================
 // Phase 1: Connect To DOM
 // ========================================
@@ -19,15 +70,15 @@ const answerBtnsNodeList = document.querySelectorAll(".answer-btn");
 // Phase 2: DOM Manipulation
 // =======================
 
-gameTitle.textContent = "⚡ Quick Fire Trivia" // Changes the game title
-console.log("First Question:", questionText.textContent) // Logs the first question of the Trivia
+gameTitle.textContent = "⚡ Quick Fire Trivia"; // Changes the game title
+console.log("First Question:", questionText.textContent); // Logs the first question of the Trivia
 questionNumber.textContent = questionNumber.textContent.toUpperCase();
 
-const firstBtn = answerBtnsNodeList[0]
+const firstBtn = answerBtnsNodeList[0];
 const firstLi = firstBtn.parentElement;
 
-console.log("The first button:", firstBtn)
-console.log("Its parent <li>:", firstLi)
+console.log("The first button:", firstBtn);
+console.log("Its parent <li>:", firstLi);
 console.log("The <ul> that holds all buttons:", firstLi.parentElement);
 
 //questionCard.classList.add("answered");
