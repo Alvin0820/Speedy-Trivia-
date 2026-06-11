@@ -24,6 +24,26 @@ const questions = [
     answers: ["Java", "C++", "JavaScript", "Python"],
     correct: 2,
   },
+  {
+    text: "What does DOM stand for?",
+    answers: [
+      "Data Object Model",
+      "Document Object Model",
+      "Disk Object Model",
+      "Database Object Model",
+    ],
+    correct: 1,
+  },
+  {
+    text: "What does LAN stand for?",
+    answers: [
+      "Label Area Network",
+      "Local Area Network",
+      "Language Area Network",
+      "Leading Area Network",
+    ],
+    correct: 1,
+  },
 ];
 
 let currentIndex = 0;
@@ -45,98 +65,108 @@ const answerBtnsNodeList = document.querySelectorAll(".answer-btn");
 
 function loadQuestion(index) {
   const currentQuestion = questions[index];
-  questionNumber.textContent = "Question ${index + 1}"
+  const currNum = index + 1;
+  questionNumber.textContent =
+    " Questions " + currNum + " of " + questions.length;
   questionText.textContent = currentQuestion.text;
 
   const btnArray = Array.from(answerBtnsNodeList);
 
   btnArray.forEach((btn, i) => {
     btn.textContent = currentQuestion.answers[i];
-    btn.className = "answer-btn" 
+    btn.className = "answer-btn";
   });
 
-  nextBtn.classList.add("hidden")
+  nextBtn.classList.add("hidden");
 
   questionCard.classList.remove("removed");
 }
 
-answerList.addEventListener("click", (event)=> {
-    // Allow button clicks
-    if(event.target.tagName !== "BUTTON") return
-    
-    console.log("target:", event.target)
-    console.log("currentTarget:", event.currentTarget);
+answerList.addEventListener("click", (event) => {
+  // Allow button clicks
+  if (event.target.tagName !== "BUTTON") return;
 
-    const btnArray = Array.from(answerBtnsNodeList)
-    const selectedIndex = btnArray.indexOf(event.target);
+  console.log("target:", event.target);
+  console.log("currentTarget:", event.currentTarget);
 
-    // Find the correct answer index
-    const currentQuestion = questions[currentIndex]
-    const correctIndex = currentQuestion.correct;
+  const btnArray = Array.from(answerBtnsNodeList);
+  const selectedIndex = btnArray.indexOf(event.target);
 
-    // Check the answer
-    if(selectedIndex === correctIndex) {
-        event.target.classList.add("correct")
-        score++
-        scoreDisplay.textContent = score
-    } else {
-        event.target.classList.add("wrong")
-        btnArray[correctIndex].classList.add("correct")
-    }
+  // Find the correct answer index
+  const currentQuestion = questions[currentIndex];
+  const correctIndex = currentQuestion.correct;
 
-    btnArray.forEach(btn => {
-        btn.classList.add("disabled")
-    });
+  // Check the answer
+  if (selectedIndex === correctIndex) {
+    event.target.classList.add("correct");
+    score++;
+    scoreDisplay.textContent = score;
+  } else {
+    event.target.classList.add("wrong");
+    btnArray[correctIndex].classList.add("correct");
+  }
 
-    questionCard.classList.add("answered")
-    nextBtn.classList.remove("hidden")
+  btnArray.forEach((btn) => {
+    btn.classList.add("disabled");
+  });
+
+  questionCard.classList.add("answered");
+  nextBtn.classList.remove("hidden");
 });
 
 nextBtn.addEventListener("click", () => {
-    currentIndex ++
-    if(currentIndex < questions.length){
-     loadQuestion(currentIndex)
-    }else {
-        showEndScreen();
-    }
-})
+  currentIndex++;
+  if (currentIndex < questions.length) {
+    loadQuestion(currentIndex);
+  } else {
+    showEndScreen();
+  }
+});
 
-function showEndScreen(){
-    // 1. Hide the question card
-    questionCard.classList.add("hidden")
-    // 2. Show the end screen
-    endScreen.classList.remove("hidden")
-    
-    const scoreHeading = document.textContent("h2")
-    scoreHeading.textContent = 'You scored ${score} out of ${questions.length}'
+function showEndScreen() {
+  // 1. Hide the question card
+  questionCard.classList.add("hidden");
+  // 2. Show the end screen
+  endScreen.classList.remove("hidden");
 
-    const message = document.createElement("p")
+  const scoreHeading = document.createElement("h2");
+  scoreHeading.textContent = `You scored ${score} out of ${questions.length}`;
 
-    if (score === questions.length) {
-        message.textContent = "Perfect Score! Good Job!"
-    }else if (score >= Math.ceil(questions.length / 2)) {
-        message.textContent = "Nice Work! You passed"
-    } else {
-        message.textContent = "Keep practicing and try again!"
-    }
+  const message = document.createElement("p");
 
-    const restartButton = document.createElement("button")
-    restartButton.id = "restart-btn"
-    restartButton.textContent = "Play Again";
+  if (score === questions.length) {
+    message.textContent = "Perfect Score! Good Job!";
+  } else if (score >= Math.ceil(questions.length / 2)) {
+    message.textContent = "Nice Work! You passed";
+  } else {
+    message.textContent = "Keep practicing and try again!";
+  }
 
-    endScreen.appendChild(scoreHeading)
-    endScreen.appendChild(message)
-    endScreen.appendChild(restartButton)
-};
+  const restartButton = document.createElement("button");
+  restartButton.id = "restart-btn";
+  restartButton.textContent = "Play Again";
 
-loadQuestion(0);
+  endScreen.appendChild(scoreHeading);
+  endScreen.appendChild(message);
+  endScreen.appendChild(restartButton);
+}
 
+endScreen.addEventListener("click", (event) => {
+  if (event.target.id !== "restart-btn") return;
+  score = 0;
+  currentIndex = 0;
+  scoreDisplay.textContent = score;
+  endScreen.innerHTML = "";
+  endScreen.classList.add("hidden");
+  questionCard.classList.remove("hidden");
+  loadQuestion(0);
+});
 // Why does clicking a button inside #answer-list trigger this listener?
 // Answer:
 //
 // What is the difference between event.target and event.currentTarget here?
-// event.target  -> 
-// event.currentTarget  -> 
+// event.target  ->
+// event.currentTarget  ->
 //
 
 // =========================================
